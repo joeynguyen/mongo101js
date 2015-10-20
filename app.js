@@ -4,10 +4,14 @@ var express = require('express'),
     MongoClient = require('mongodb').MongoClient,
     PORT = 8080;
 
+app.engine('html', cons.swig);
+app.set('view engine', 'html');
+app.set('views', __dirname + '/views');
 
 app.get('/', function(req,res) {
-    res.send("Hello world");
+    res.render('hello', {'name': 'Swig'});
 });
+
 // Handle all routes not handled previously ^^
 app.get('*', function(req,res) {
     res.send("Result not found", 404);
