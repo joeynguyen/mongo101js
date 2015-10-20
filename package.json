@@ -18,8 +18,8 @@
   "homepage": "https://github.com/joeynguyen/mongo101js#readme",
   "dependencies": {
     "consolidate": "^0.13.1",
-    "express": "^4.13.3",
-    "mongodb": "^2.0.46",
+    "express": "^3.21.2",
+    "mongodb": "^1.4.39",
     "swig": "^1.4.2"
   }
 }
