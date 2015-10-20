@@ -8,6 +8,7 @@ var express = require('express'),
 app.engine('html', cons.swig);
 app.set('view engine', 'html');
 app.set('views', __dirname + '/views');
+app.use(express.bodyParser());
 app.use(app.router);
 app.use(errorHandler);
 
@@ -15,6 +16,17 @@ var mongoclient = new MongoClient(new MongoServer('localhost', 27017, {'native_p
 var db = mongoclient.db('course');
 
 app.get('/', function(req,res) {
+    res.render('fruitPicker', {'fruits' : [ 'apples', 'oranges', 'bananas', 'peaches'] });
+});
+app.post('/favorite_fruit', function(req, res, next) {
+    var favorite = req.body.fruit;
+    if (typeof favorite === 'undefined') {
+        next(Error('Please choose a fruit!'));
+    } else {
+        res.send('Your favorite fruit is ' + favorite);
+    }
+});
+app.get('/mongo', function(req,res) {
     db.collection('hello_mongo_express').findOne({}, function(err, doc) {
         res.render('hello', doc);
     });
